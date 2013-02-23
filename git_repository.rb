@@ -10,4 +10,8 @@ class GitRepository
 		end
 		@system_wrapper.execute(commit_message)
 	end
+
+	def push
+		@system_wrapper.execute("git push origin master")
+	end
 end
