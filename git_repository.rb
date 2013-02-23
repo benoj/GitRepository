@@ -19,6 +19,10 @@ class GitRepository
 		return result
 	end
 
+	def has_untracked?
+		return true
+	end
+
 	def push(hash = {})
 		branch = hash[:branch] || 'master'
 		repository = "--repo='#{@ssh_repository}'" unless @ssh_repository.nil?
