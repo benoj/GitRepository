@@ -1,6 +1,6 @@
 class GitRepository
 	def initialize(hash = {})
-		@system_wrapper = hash[:system] if hash.has_key?(:system)
+		@system_wrapper = hash[:system] || SystemWrapper.new
 		@remote = hash[:remote] || 'origin'
 		@ssh_repository = hash[:ssh_repository]
 	end
@@ -18,5 +18,12 @@ class GitRepository
 		repository = "--repo='#{@ssh_repository}'" unless @ssh_repository.nil?
 		location = repository || @remote
 		@system_wrapper.execute("git push #{location} #{branch}")
+	end
+end
+
+
+class SystemWrapper
+	def execute(command)
+		system command
 	end
 end
