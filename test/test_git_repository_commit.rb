@@ -18,6 +18,7 @@ class GitRepositoryCommit < Test::Unit::TestCase
     git.commit(:message => commit_message, :options => commit_options)
     assert_equal("git commit #{commit_options} -m '#{commit_message}'",mock_system.executed_command )
   end
+
 end
 
 class MockSystemWrapper
