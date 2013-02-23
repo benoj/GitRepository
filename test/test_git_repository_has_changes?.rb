@@ -8,6 +8,13 @@ class GitRepositoryHasChanges < Test::Unit::TestCase
     has_changes = git.has_changes?
     assert_equal(true,has_changes)
   end
+
+  def test_has_changed_returns_false_when_no_changes_have_occured
+    mock_system = MockSystemWrapper.new(false)
+    git = GitRepository.new(:system =>  mock_system)
+    has_changes = git.has_changes?
+    assert_equal(false,has_changes)
+  end
 end
 
 class MockSystemWrapper
