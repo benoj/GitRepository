@@ -36,6 +36,7 @@ end
 class SystemWrapper
 	def execute(command)
 		result = `#{command}`
+		puts result
 		return result
 	end
 end
