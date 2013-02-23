@@ -13,6 +13,10 @@ class GitRepository
 		@system_wrapper.execute(commit_message)
 	end
 
+	def has_changes?
+		return true
+	end
+
 	def push(hash = {})
 		branch = hash[:branch] || 'master'
 		repository = "--repo='#{@ssh_repository}'" unless @ssh_repository.nil?

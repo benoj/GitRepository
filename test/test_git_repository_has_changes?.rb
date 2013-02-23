@@ -1,19 +1,26 @@
 require 'test/unit'
 require 'git_repository'
 
-class GitRepositoryCommit < Test::Unit::TestCase
-  def test_system_called_with_correct_git_message_for_deafult_remote
-    mock_system = MockSystemWrapper.new
-    git = GitRepository.new(:system => mock_system)
-    git.push
-    assert_equal("git push origin master", mock_system.executed_command)
+class GitRepositoryHasChanges < Test::Unit::TestCase
+  def test_has_changed_returns_true_when_changes_have_occured
+    mock_system = MockSystemWrapper.new(true)
+    git = GitRepository.new(:system =>  mock_system)
+    has_changes = git.has_changes?
+    assert_equal(true,has_changes)
   end
 end
 
 class MockSystemWrapper
-  attr_reader :executed_command
+  attr_reader :git_status
+  def initialize(has_changes)
+    @has_changes = has_changes
+  end
 
   def execute(command)
-    @executed_command = command
+    if(@has_changes)
+      @git_status =   "# On branch master \n# Changes not staged for commit:\n# modified:   test/test_git_repository_has_changes?.rb"  
+    else
+      @git_status = "up to date"
+    end
   end
 end
