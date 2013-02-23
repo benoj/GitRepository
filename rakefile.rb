@@ -13,5 +13,5 @@ end
 
 def commit(message)
 	git = GitRepository.new
-	git.commit(:message => message, :options => "-a")
+	git.commit(:message => message, :options => "-a") if git.has_changes?
 end
