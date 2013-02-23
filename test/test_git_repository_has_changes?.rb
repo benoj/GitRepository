@@ -25,7 +25,7 @@ class MockSystemWrapper
 
   def execute(command)
     if(@has_changes)
-      @git_status =   "# On branch master \n# Changes not staged for commit:\n# modified:   test/test_git_repository_has_changes?.rb"  
+      @git_status =   "# On branch master Changes to be committed:\n# Changes not staged for commit:\n# modified:   test/test_git_repository_has_changes?.rb"  
     else
       @git_status = "up to date"
     end
