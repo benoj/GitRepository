@@ -22,6 +22,15 @@ class GitRepositoryCommit < Test::Unit::TestCase
     git.push(:branch => "new_branch")
     assert_equal("git push origin new_branch", mock_system.executed_command)
   end
+
+  def test_system_called_with_correct_git_message_for_repository_when_push
+    mock_system = MockSystemWrapper.new
+    ssh_repository_uri = "git@github.com:benoj/GitRepository.git"
+    git = GitRepository.new(:ssh_repository => ssh_repository_uri, :system => mock_system)
+    git.push
+    assert_equal("git push --repo='#{ssh_repository_uri}' master", mock_system.executed_command)
+  end
+
 end
 
 class MockSystemWrapper
