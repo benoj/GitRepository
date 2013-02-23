@@ -5,11 +5,8 @@ class GitRepository
 		@ssh_repository = hash[:ssh_repository]
 	end
 	def commit(hash)
-		if hash.has_key?(:options)
-			commit_message = "git commit #{hash[:options]} -m '#{hash[:message]}'"
-		else
-			commit_message = "git commit -m '#{hash[:message]}'"
-		end
+		message_with_options = insert_options(:message => "git commit", :options=>hash[:options])
+		commit_message = "#{message_with_options} -m '#{hash[:message]}'"
 		@system_wrapper.execute(commit_message)
 	end
 
@@ -29,13 +26,18 @@ class GitRepository
 		branch = hash[:branch] || 'master'
 		repository = "--repo='#{@ssh_repository}'" unless @ssh_repository.nil?
 		location = repository || @remote
-
-	if hash.has_key?(:options)
-			push_message = "git push #{hash[:options]} #{location} #{branch}"
-		else
-			push_message = "git push #{location} #{branch}"
-		end
+		message_with_options = insert_options(:message => "git push", :options => hash[:options])
+		push_message = "#{message_with_options} #{location} #{branch}"
 		@system_wrapper.execute(push_message)
+	end
+
+	private
+	def insert_options(hash)
+		if(hash[:options].nil?)
+			return "#{hash[:message]}"
+		else
+			return "#{hash[:message]} #{hash[:options]}"
+		end
 	end
 end
 
