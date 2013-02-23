@@ -1,11 +1,7 @@
 class GitRepository
-	def initialize(hash)
+	def initialize(hash = {})
 		@system_wrapper = hash[:system] if hash.has_key?(:system)
-		if hash.has_key?(:remote)
-			@remote = hash[:remote] 
-		else
-			@remote = "origin"
-		end
+		@remote = hash[:remote] || 'origin'
 	end
 	def commit(hash)
 		if hash.has_key?(:options)
@@ -16,7 +12,8 @@ class GitRepository
 		@system_wrapper.execute(commit_message)
 	end
 
-	def push()
-		@system_wrapper.execute("git push #{@remote} master")
+	def push(hash = {})
+		branch = hash[:branch] || 'master'
+		@system_wrapper.execute("git push #{@remote} #{branch}")
 	end
 end
