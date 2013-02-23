@@ -20,7 +20,9 @@ class GitRepository
 	end
 
 	def has_untracked?
-		return true
+		git_status = @system_wrapper.execute("git status")
+		result = git_status.include?("Untracked files:")
+		return result
 	end
 
 	def push(hash = {})
