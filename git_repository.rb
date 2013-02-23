@@ -17,7 +17,13 @@ class GitRepository
 		branch = hash[:branch] || 'master'
 		repository = "--repo='#{@ssh_repository}'" unless @ssh_repository.nil?
 		location = repository || @remote
-		@system_wrapper.execute("git push #{location} #{branch}")
+
+	if hash.has_key?(:options)
+			push_message = "git push #{hash[:options]} #{location} #{branch}"
+		else
+			push_message = "git push #{location} #{branch}"
+		end
+		@system_wrapper.execute(push_message)
 	end
 end
 
