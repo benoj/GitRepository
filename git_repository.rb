@@ -1,6 +1,6 @@
 class GitRepository
-	def initialize(system_wrapper)
-		@system_wrapper = system_wrapper
+	def initialize(hash)
+		@system_wrapper = hash[:system] if hash.has_key?(:system)
 	end
 	def commit(hash)
 		if hash.has_key?(:options)

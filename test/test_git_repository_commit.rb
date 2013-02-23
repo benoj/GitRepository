@@ -4,7 +4,7 @@ require '../git_repository'
 class GitRepositoryCommit < Test::Unit::TestCase
   def test_system_called_with_correct_git_message
     mock_system = MockSystemWrapper.new
-    git = GitRepository.new(mock_system)
+    git = GitRepository.new(:system => mock_system)
     commit_message = "this is a test message"
     git.commit(:message => commit_message)
     assert_equal("git commit -m '#{commit_message}'",mock_system.executed_command )
@@ -12,7 +12,7 @@ class GitRepositoryCommit < Test::Unit::TestCase
 
     def test_system_called_with_correct_git_message_and_options
     mock_system = MockSystemWrapper.new
-    git = GitRepository.new(mock_system)
+    git = GitRepository.new(:system => mock_system)
     commit_message = "this is a test message"
     commit_options = "-v"
     git.commit(:message => commit_message, :options => commit_options)
