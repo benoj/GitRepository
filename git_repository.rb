@@ -15,7 +15,9 @@ class GitRepository
 
 	def has_changes?
 		git_status = @system_wrapper.execute("git status")
-		return git_status.include?("Changes not staged for commit")
+		result = git_status.include?("Changes not staged for commit")
+		puts result
+		return result
 	end
 
 	def push(hash = {})
