@@ -13,6 +13,7 @@ The package is installed on rubygems and can be installed using the following co
 
 You will need to insert the following command in your project `require 'git_repository`
 ##Usage
+
 ###Creation
 
 The initialization of GitReposity takes a hash of symbols, with the following options:
@@ -67,3 +68,44 @@ The following will commit a specific file to git with a message and forcefully p
     git = GitRepository.new
     git.commit(:message => 'updated rakefile')
     git.push(:options => "-f")
+
+###Pulling
+
+The git repository can be pulled from by calling the .pull method. This method takes a hash of symbols, with the following options:
+
+####options
+* :options - This represents any options for git 
+
+
+The following will pull changes to a repository, before commiting and pushing
+    git = GitRepository.new
+    git.pull
+    git.commit(:message => 'first commit')
+    git.push
+
+The following will pull changes to a repository, before commiting and pushing to the repository with a rebase option
+    git = GitRepository.new
+    git.pull
+    git.commit(:message => 'first commit', :options => '--rebase')
+    git.push
+
+###Adding
+
+Unversioned files can be added to the repository by calling the .add method. This method takes a hash of symbols, with the following options:
+
+####options
+* :files - This represents any file/regular expression for files to be added (defaults to all files if not set)
+* :options - This represents any options for git 
+
+
+The following will add all unversioned files to the repository, before commiting and pushing
+    git = GitRepository.new
+    git.add
+    git.commit(:message => 'first commit')
+    git.push
+
+The following will add all unversioned files in the src directory to the repository, before commiting and pushing
+    git = GitRepository.new
+    git.add(:files => '/src/*')
+    git.commit(:message => 'first commit')
+    git.push
