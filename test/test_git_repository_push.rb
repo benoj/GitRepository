@@ -18,8 +18,8 @@ class GitRepositoryCommit < Test::Unit::TestCase
 
   def test_system_called_with_correct_git_message_for_non_default_branch
     mock_system = MockSystemWrapper.new
-    git = GitRepository.new(:system => mock_system)
-    git.push(:branch => "new_branch")
+    git = GitRepository.new(:system => mock_system, :branch => "new_branch")
+    git.push
     assert_equal("git push origin new_branch", mock_system.executed_command)
   end
 

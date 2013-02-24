@@ -6,7 +6,7 @@ class GitRepositoryPull < Test::Unit::TestCase
     mock_system = MockSystemWrapper.new
     git = GitRepository.new(:system => mock_system)
     git.pull
-    assert_equal("git pull",mock_system.executed_command )
+    assert_equal("git pull origin master",mock_system.executed_command )
   end
 
   # def test_system_called_with_correct_git_message_and_options

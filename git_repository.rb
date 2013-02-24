@@ -1,8 +1,9 @@
 class GitRepository
 	def initialize(hash = {})
 		@system_wrapper = hash[:system] || SystemWrapper.new
-		@remote = hash[:remote] || 'origin'
-		@location = get_repository(hash[:ssh_repository]) || @remote
+		remote = hash[:remote] || 'origin'
+		@location = get_repository(hash[:ssh_repository]) || remote
+		@branch = hash[:branch] || 'master'
 	end
 	def commit(hash)
 		message_with_options = insert_options(:message => 'git commit', :options=>hash[:options])
@@ -22,14 +23,13 @@ class GitRepository
 	end
 
 	def push(hash = {})
-		branch = hash[:branch] || 'master'
 		push_message_with_options = insert_options(:message => 'git push', :options => hash[:options])
-		push_message = "#{push_message_with_options} #{@location} #{branch}"
+		push_message = "#{push_message_with_options} #{@location} #{@branch}"
 		@system_wrapper.execute(push_message)
 	end
 
 	def pull
-		@system_wrapper.execute("git pull")
+		@system_wrapper.execute("git pull #{@location} #{@branch}")
 	end
 
 	def add(hash = {})
