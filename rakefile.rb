@@ -13,6 +13,9 @@ end
 
 def commit(message)
 	git = GitRepository.new
+	if(git.has_untracked?)
+		git.add
+	end
 	if(git.has_changes?)
 		git.commit(:message => message, :options => "-a") 
 	end
