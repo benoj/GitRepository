@@ -109,3 +109,54 @@ The following will add all unversioned files in the src directory to the reposit
     git.add(:files => '/src/*')
     git.commit(:message => 'first commit')
     git.push
+
+
+###Getting information about your git repository
+
+In some situations, you may wish to find out if there have been updates to files in your project, or if there are unversioned files. This information can be obtained by calling `.has_changes?` or `.has_untracked?`
+
+
+The following will determine if there are any changes to your git repository (e.g. files modified) and then push to your repository.
+    git = GitRepository.new
+    if(git.has_changes?)
+    	git.commit(:message => 'updated project')
+    	git.push
+    end
+    
+The following will determine if there have been and new files/folders added to your repository and then add all files to the repository and commit.
+    git = GitRepository.new
+    if(git.has_untracked?)
+    	git.add
+    	git.commit(:message => 'added files to project')
+    	git.push
+    end
+
+##Author
+###Ben Flowers
+	*Twitter:
+	*LinkedIn:
+
+##Example
+
+The following is an extract from the rakescript, used by this project:
+    task :online, :message do |t, args|
+		git = GitRepository.new
+		git.pull
+		Rake::Task[:run_tests].invoke
+		commit(args.message,git)
+		git.push
+    end
+
+    def commit(message,git_repository)
+		if(git_repository.has_untracked?)
+			git_repository.add
+		end
+		if(git_repository.has_changes?)
+			git_repository.commit(:message => message, :options => "-a") 
+		end
+	end
+
+This raketask takes a commit message, pulls changes from the repository, runs the unit tests, checks for untracked files (adding them if neccessary) then checks for changes to the repository an commts all files with the message passed in from the rake command.
+
+This task is called as folllows:
+    rake online['hello world!']
