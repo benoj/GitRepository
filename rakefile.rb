@@ -20,6 +20,10 @@ task :run_tests do
 	end
 end
 
+task :blah do
+	sh "git commit -a -m 'this is a test'"
+end
+
 def commit(message,git_repository)
 	if(git_repository.has_untracked?)
 		git_repository.add
