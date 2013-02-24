@@ -7,9 +7,13 @@ This project was created to simplify the process of deploying applications using
 
 ##Installation
 
-The package is installed on rubygems and can be installed using the following command line or adding the following line to your gemfile.
+The package is installed on rubygems and can be installed using the following command
 
     gem install 'git_repository'
+
+or adding the following to your Gemfile
+    
+    gem 'git_repository'
 
 You will need to insert the following command in your project `require 'git_repository`
 ##Usage
