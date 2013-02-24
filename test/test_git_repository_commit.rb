@@ -10,7 +10,7 @@ class GitRepositoryCommit < Test::Unit::TestCase
     assert_equal("git commit -m '#{commit_message}'",mock_system.executed_command )
   end
 
-    def test_system_called_with_correct_git_message_and_options
+  def test_system_called_with_correct_git_message_and_options
     mock_system = MockSystemWrapper.new
     git = GitRepository.new(:system => mock_system)
     commit_message = "this is a test message"

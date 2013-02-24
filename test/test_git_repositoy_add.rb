@@ -15,6 +15,14 @@ class GitRepositoryAdd < Test::Unit::TestCase
 		git.add(:files => "*.rb")
 		assert_equal("git add *.rb", mock_system.executed_command)
 	end
+
+	def test_system_called_with_correct_git_message_and_options
+	    mock_system = MockSystemWrapper.new
+	    git = GitRepository.new(:system => mock_system)
+	    add_options = "-f"
+	    git.add(:options => add_options)
+	    assert_equal("git add #{add_options} .",mock_system.executed_command )
+  end
 end
 
 class MockSystemWrapper
