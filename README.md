@@ -108,12 +108,14 @@ Unversioned files can be added to the repository by calling the `.add` method. T
 
 
 The following will add all unversioned files to the repository, before commiting and pushing
+
     git = GitRepository.new
     git.add
     git.commit(:message => 'first commit')
     git.push
 
 The following will add all unversioned files in the src directory to the repository, before commiting and pushing
+
     git = GitRepository.new
     git.add(:files => '/src/*')
     git.commit(:message => 'first commit')
