@@ -34,7 +34,7 @@ The following will create a repositiory pointing to origin on master
 
 The following will create a repository pointing to origin on my_branch
 
-    git = GitRepository.new(:branch => 'my_branch'
+    git = GitRepository.new(:branch => 'my_branch')
 
 The following will create a repository pointing to git@your-repository.com on origin
 
