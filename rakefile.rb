@@ -1,11 +1,17 @@
 require 'git_repository'
 
 task :online, :message do |t, args|
-	@git = GitRepository.new
-	@git.pull
+	git = GitRepository.new
+	git.pull
 	Rake::Task[:run_tests].invoke
-	commit(args.message)
-	@git.push
+	commit(args.message,git)
+	git.push
+end
+
+task :offline, :message do |t, args|
+	git = GitRepository.new
+	Rake::Task[:run_tests].invoke
+	commit(args.message,git)
 end
 
 task :run_tests do
@@ -14,11 +20,11 @@ task :run_tests do
 	end
 end
 
-def commit(message)
-	if(@git.has_untracked?)
-		@git.add
+def commit(message,git_repository)
+	if(git_repository.has_untracked?)
+		git_repository.add
 	end
-	if(@git.has_changes?)
-		@git.commit(:message => message, :options => "-a") 
+	if(git_repository.has_changes?)
+		git_repository.commit(:message => message, :options => "-a") 
 	end
 end
