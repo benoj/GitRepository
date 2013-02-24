@@ -48,3 +48,22 @@ The following will commit to git with a message
 The following will commit a specific file to git with a message
     git = GitRepository.new
     git.commit(:message => 'updated rakefile', :options => '-F rakefile.rb')
+
+
+###Pushing
+
+The git repository can be pushed to by calling the .push method. This method takes a hash of symbols, with the following options:
+
+####options
+* :options - This represents any options for git 
+
+
+The following will commit to git with a message, and push the contents to the repository
+    git = GitRepository.new
+    git.commit(:message => 'first commit')
+    git.push
+
+The following will commit a specific file to git with a message and forcefully pushes to the repositor
+    git = GitRepository.new
+    git.commit(:message => 'updated rakefile')
+    git.push(:options => "-f")
