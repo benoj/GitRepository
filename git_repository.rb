@@ -28,6 +28,10 @@ class GitRepository
 		@system_wrapper.execute(push_message)
 	end
 
+	def add
+		@system_wrapper.execute("git add .")
+	end
+
 	private
 	def get_repository(repository)
 		return "--repo='#{repository}'" unless repository.nil?
