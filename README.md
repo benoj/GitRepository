@@ -15,6 +15,8 @@ You will need to insert the following command in your project `require 'git_repo
 ##Usage
 ###Creation
 
+The initialization of GitReposity takes a hash of symbols, with the following options:
+
 ####options
 * :remote - This represents the name of your git remote (defaults to origin if not specified)
 * :ssh_repository - This representst the ssh URI of your git repository. You will need to add your public key to the repository provider (e.g. github). This is an optional parameter.
@@ -30,4 +32,19 @@ The following will create a repository pointing to origin on my_branch
 The following will create a repository pointing to git@your-repository.com on origin
     git = GitRepository.new(:ssh_repository => 'git@your-repository.com')
 
+###Commiting
 
+The git repository can be commited to by calling the .commit method. This method takes a hash of symbols, with the following options:
+
+####options
+* :message - This represents the message for the commit to your repository
+* :options - This represents any options for git 
+
+
+The following will commit to git with a message
+    git = GitRepository.new
+    git.commit(:message => 'first commit')
+
+The following will commit a specific file to git with a message
+    git = GitRepository.new
+    git.commit(:message => 'updated rakefile', :options => '-F rakefile.rb')
