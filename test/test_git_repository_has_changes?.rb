@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'git_repository'
+require 'lib/git_repository'
 
 class GitRepositoryHasChanges < Test::Unit::TestCase
   def test_has_changed_returns_true_when_changes_have_occured

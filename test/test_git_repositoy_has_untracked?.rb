@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'git_repository'
+require 'lib/git_repository'
 
 class GitRepositoryHasUntracked < Test::Unit::TestCase
 	def test_that_return_true_when_untracked_files_exist

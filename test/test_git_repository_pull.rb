@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'git_repository'
+require 'lib/git_repository'
 
 class GitRepositoryPull < Test::Unit::TestCase
   def test_system_called_with_correct_git_message

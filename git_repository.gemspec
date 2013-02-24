@@ -5,6 +5,6 @@ Gem::Specification.new do |s|
   s.summary     = "Simple interaction with git repository. Useful for deployment scripts."
   s.authors     = ["Ben Flowers"]
   s.email       = 'ben.j.flowers@gmail.com'
-  s.files       = ["git_repository.rb"]
+  s.files       = ["lib/git_repository.rb"]
   s.homepage    = 'https://github.com/benoj/GitRepository'
 end

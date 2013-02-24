@@ -1,4 +1,4 @@
-require 'git_repository'
+require 'lib/git_repository'
 
 task :online, :message do |t, args|
 	git = GitRepository.new

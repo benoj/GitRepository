@@ -1,5 +1,5 @@
 require 'test/unit'
-require 'git_repository'
+require 'lib/git_repository'
 
 class GitRepositoryAdd < Test::Unit::TestCase
 	def test_that_when_repository_add_called_with_no_parameters_git_adds_all
