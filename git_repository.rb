@@ -28,6 +28,10 @@ class GitRepository
 		@system_wrapper.execute(push_message)
 	end
 
+	def pull
+		@system_wrapper.execute("git pull")
+	end
+
 	def add(hash = {})
 		files = hash[:files] || '.'
 		add_message_with_options = insert_options(:message => 'git add', :options => hash[:options])
