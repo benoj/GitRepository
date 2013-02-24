@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'git_repository'
-  s.version     = '0.0.1'
+  s.version     = '0.0.11'
   s.date        = '2013-02-24'
   s.summary     = "Simple interaction with git repository. Useful for deployment scripts."
   s.authors     = ["Ben Flowers"]
