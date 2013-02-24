@@ -57,6 +57,7 @@ end
 
 class SystemWrapper
 	def execute(command)
+		puts ("#{command}")
 		`#{command}`
 	end
 end
