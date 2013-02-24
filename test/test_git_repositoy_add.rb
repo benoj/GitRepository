@@ -8,6 +8,13 @@ class GitRepositoryAdd < Test::Unit::TestCase
 		git.add
 		assert_equal("git add .",mock_system.executed_command)
 	end
+
+	def test_that_when_repositoy_add_called_with_file_git_called_correctly
+		mock_system = MockSystemWrapper.new
+		git = GitRepository.new(:system => mock_system)
+		git.add(:files => "*.rb")
+		assert_equal("git add *.rb", mock_system.executed_command)
+	end
 end
 
 class MockSystemWrapper

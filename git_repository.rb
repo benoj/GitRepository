@@ -28,8 +28,9 @@ class GitRepository
 		@system_wrapper.execute(push_message)
 	end
 
-	def add
-		@system_wrapper.execute("git add .")
+	def add(hash = {})
+		files = hash[:files] || '.'
+		@system_wrapper.execute("git add #{files}")
 	end
 
 	private
