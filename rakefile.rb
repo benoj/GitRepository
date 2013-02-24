@@ -1,10 +1,11 @@
 require 'git_repository'
 
-task :test_commit, :message do |t, args|
+task :online, :message do |t, args|
 	@git = GitRepository.new
 	@git.pull
 	Rake::Task[:run_tests].invoke
 	commit(args.message)
+	@git.push
 end
 
 task :run_tests do
