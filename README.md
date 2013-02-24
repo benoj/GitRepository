@@ -19,18 +19,21 @@ You will need to insert the following command in your project `require 'git_repo
 The initialization of GitReposity takes a hash of symbols, with the following options:
 
 ####options
-* :remote - This represents the name of your git remote (defaults to origin if not specified)
-* :ssh_repository - This representst the ssh URI of your git repository. You will need to add your public key to the repository provider (e.g. github). This is an optional parameter.
-* :branch - This represents the branch that you are pushing to or pulling from (defaults to master if not specified)
-* :system - This is a wrapper around the system. This should not be specified unless you wish to use another system for calling git.
+* **:remote** - This represents the name of your git remote (defaults to origin if not specified)
+* **:ssh_repository** - This representst the ssh URI of your git repository. You will need to add your public key to the repository provider (e.g. github). This is an optional parameter.
+* **:branch** - This represents the branch that you are pushing to or pulling from (defaults to master if not specified)
+* **:system** - This is a wrapper around the system. This should not be specified unless you wish to use another system for calling git.
 
 The following will create a repositiory pointing to origin on master 
+
     git = GitRepository.new
 
 The following will create a repository pointing to origin on my_branch
+
     git = GitRepository.new(:branch => 'my_branch'
 
 The following will create a repository pointing to git@your-repository.com on origin
+
     git = GitRepository.new(:ssh_repository => 'git@your-repository.com')
 
 ###Commiting
@@ -38,15 +41,17 @@ The following will create a repository pointing to git@your-repository.com on or
 The git repository can be commited to by calling the .commit method. This method takes a hash of symbols, with the following options:
 
 ####options
-* :message - This represents the message for the commit to your repository
-* :options - This represents any options for git 
+* **:message** - This represents the message for the commit to your repository
+* **:options** - This represents any options for git 
 
 
 The following will commit to git with a message
+
     git = GitRepository.new
     git.commit(:message => 'first commit')
 
 The following will commit a specific file to git with a message
+
     git = GitRepository.new
     git.commit(:message => 'updated rakefile', :options => '-F rakefile.rb')
 
@@ -56,15 +61,17 @@ The following will commit a specific file to git with a message
 The git repository can be pushed to by calling the .push method. This method takes a hash of symbols, with the following options:
 
 ####options
-* :options - This represents any options for git 
+* **:options** - This represents any options for git 
 
 
 The following will commit to git with a message, and push the contents to the repository
+
     git = GitRepository.new
     git.commit(:message => 'first commit')
     git.push
 
 The following will commit a specific file to git with a message and forcefully pushes to the repositor
+
     git = GitRepository.new
     git.commit(:message => 'updated rakefile')
     git.push(:options => "-f")
@@ -74,16 +81,18 @@ The following will commit a specific file to git with a message and forcefully p
 The git repository can be pulled from by calling the .pull method. This method takes a hash of symbols, with the following options:
 
 ####options
-* :options - This represents any options for git 
+* **:options** - This represents any options for git 
 
 
 The following will pull changes to a repository, before commiting and pushing
+
     git = GitRepository.new
     git.pull
     git.commit(:message => 'first commit')
     git.push
 
 The following will pull changes to a repository, before commiting and pushing to the repository with a rebase option
+
     git = GitRepository.new
     git.pull
     git.commit(:message => 'first commit', :options => '--rebase')
@@ -94,8 +103,8 @@ The following will pull changes to a repository, before commiting and pushing to
 Unversioned files can be added to the repository by calling the .add method. This method takes a hash of symbols, with the following options:
 
 ####options
-* :files - This represents any file/regular expression for files to be added (defaults to all files if not set)
-* :options - This represents any options for git 
+* **:files** - This represents any file/regular expression for files to be added (defaults to all files if not set)
+* **:options** - This represents any options for git 
 
 
 The following will add all unversioned files to the repository, before commiting and pushing
@@ -133,12 +142,15 @@ The following will determine if there have been and new files/folders added to y
 
 ##Author
 ###Ben Flowers
-	*Twitter:
-	*LinkedIn:
+
+* Twitter: @BDWFlowers
+* LinkedIn: [Ben Flowers](http://www.linkedin.com/pub/ben-flowers/41/414/3a4)
+* Email: ben.j.flowers@gmail.com
 
 ##Example
 
 The following is an extract from the rakescript, used by this project:
+
     task :online, :message do |t, args|
 		git = GitRepository.new
 		git.pull
@@ -156,7 +168,8 @@ The following is an extract from the rakescript, used by this project:
 		end
 	end
 
-This raketask takes a commit message, pulls changes from the repository, runs the unit tests, checks for untracked files (adding them if neccessary) then checks for changes to the repository an commts all files with the message passed in from the rake command.
+This raketask takes a commit message, pulls changes from the repository, runs the unit tests, checks for untracked files (adding them if necessary) then checks for changes to the repository an commits all files with the message passed in from the rake command.
 
-This task is called as folllows:
+This task is called as follows:
+
     rake online['hello world!']
