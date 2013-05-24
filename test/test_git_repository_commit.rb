@@ -16,7 +16,7 @@ class GitRepositoryCommit < Test::Unit::TestCase
     commit_message = "this is a test message"
     commit_options = "-v"
     git.commit(:message => commit_message, :options => commit_options)
-    assert_equal("git commit #{commit_options} -m POOPIN '#{commit_message}'",mock_system.executed_command )
+    assert_equal("git commit #{commit_options} -m '#{commit_message}'",mock_system.executed_command )
   end
 
 end
